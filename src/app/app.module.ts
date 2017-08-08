@@ -8,15 +8,20 @@ import {
 } from '@angular/http';
 
 import { routing } from './app.routing'
-import { AppComponent }   from './app.component';
+import { AppComponent } from './app.component';
 
 import { LoginComponent } from './login/login.component'
+import { ChatsListComponent } from './chats-list/chats-list.component'
+import { ChatComponent } from './chat/chat.component'
 import { AuthenticationService } from './_services/authentication.service'
+import { ChatService } from './_services/chat.service'
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ChatsListComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,8 @@ import { AuthenticationService } from './_services/authentication.service'
     routing
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

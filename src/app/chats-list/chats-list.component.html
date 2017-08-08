@@ -1,0 +1,10 @@
+<div class="col-md-4 chats-list">
+  <div class="list-group">
+    <button *ngFor="let chat of chats" type="button" class="list-group-item" (click)="select(chat)" [class.active]="chat === activeChat">
+      {{chat.subject}}
+    </button>
+  </div>
+</div>
+<div *ngIf="activeChat" class="col-md-8 chat-window">
+  <chat-container [selectedChat]="activeChat"></chat-container>
+</div>

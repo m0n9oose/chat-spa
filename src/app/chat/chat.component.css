@@ -1,0 +1,13 @@
+.chat-window {
+  height: 700px;
+  padding: 3px;
+}
+
+.chat-window .messages-window {
+  height: 80%;
+  overflow: auto;
+}
+
+.chat-window {
+  border-left: 1px solid #e1e1e1;
+}

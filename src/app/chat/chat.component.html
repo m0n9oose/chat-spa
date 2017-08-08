@@ -1,0 +1,10 @@
+<div *ngIf="selectedChat">
+  <div class="messages-window">
+    <div *ngFor="let message of messages" class="panel panel-default">
+      <div class="panel-body">
+        <p><strong>{{message.author}}</strong> wrote:</p>
+        {{message.text}}
+      </div>
+    </div>
+  </div>
+</div>

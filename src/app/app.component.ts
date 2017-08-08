@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './_models/user'
+import { AuthenticationService } from './_services/authentication.service'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  currentUser: User;
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  }
+
+  loggedIn() {
+    if (localStorage.getItem('currentUser')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
