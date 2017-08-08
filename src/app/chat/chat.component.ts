@@ -3,6 +3,7 @@ import { Chat }               from '../_models/chat';
 import { Message }            from '../_models/message';
 import { User }               from '../_models/user';
 import { ChatService }        from '../_services/chat.service';
+import { WsService }          from '../_services/ws.service';
 
 @Component({
   selector: 'chat-container',
@@ -25,7 +26,16 @@ export class ChatComponent {
   members: User[] = [];
   private _selectedChat: Chat;
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private wsService: WsService
+  ) {
+    this.wsService.msgStream.subscribe(
+      (msg: Message) => {
+        this.messages.push(msg);
+      }
+    )
+  }
 
   private loadChat(): void {
     this.chatService.get(this._selectedChat.id).subscribe(data => {

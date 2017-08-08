@@ -2,7 +2,7 @@
   <div class="messages-window">
     <div *ngFor="let message of messages" class="panel panel-default">
       <div class="panel-body">
-        <p><strong>{{message.author}}</strong> wrote:</p>
+        <p><strong>{{message.author}}</strong> @ {{message.created_at | date:"MMM, dd H:mm"}} wrote:</p>
         {{message.text}}
       </div>
     </div>

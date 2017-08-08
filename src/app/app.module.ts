@@ -15,6 +15,7 @@ import { ChatsListComponent } from './chats-list/chats-list.component'
 import { ChatComponent } from './chat/chat.component'
 import { AuthenticationService } from './_services/authentication.service'
 import { ChatService } from './_services/chat.service'
+import { WsService } from './_services/ws.service'
 
 @NgModule({
   declarations: [
@@ -28,11 +29,12 @@ import { ChatService } from './_services/chat.service'
     AlertModule.forRoot(),
     HttpModule,
     FormsModule,
-    routing
+    routing,
   ],
   providers: [
     AuthenticationService,
-    ChatService
+    ChatService,
+    WsService
   ],
   bootstrap: [AppComponent]
 })
