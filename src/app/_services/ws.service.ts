@@ -10,25 +10,25 @@ const BASE_URL = 'ws://localhost:3000';
 
 @Injectable()
 export class WsService {
+  private urlString: string;
   msgStream;
   constructor() {
+    this.urlString = this.connectionUrl();
     this.msgStream = this.connect().map((response: MessageEvent): Message => {
       return JSON.parse(response.data)
     });
   }
+
   private subject: Subject<any>;
 
-  public connect(): Subject<MessageEvent> {
-    if (!this.subject) {
-      this.subject = this.create(BASE_URL);
-      console.log("Successfully connected: " + BASE_URL);
-    }
+  connect(): Subject<MessageEvent> {
+    if (!this.subject) { this.subject = this.create(); }
     return this.subject;
   }
 
-  private create(url): Subject<MessageEvent> {
-    let ws = new WebSocket(BASE_URL);
-
+  private create(): Subject<MessageEvent> {
+    let ws = new WebSocket(this.urlString);
+    console.log("Successfully connected: " + this.urlString);
     let observable = Observable.create(
       (obs: Observer<MessageEvent>) => {
         ws.onmessage = obs.next.bind(obs);
@@ -46,5 +46,16 @@ export class WsService {
       }
     }
     return Subject.create(observer, observable);
+  }
+
+  private connectionUrl(): string {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      return BASE_URL +
+        '?email=' + currentUser.email +
+        '&token=' + currentUser.token
+    } else {
+      return BASE_URL;
+    }
   }
 }
