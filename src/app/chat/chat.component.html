@@ -1,10 +1,15 @@
-<div *ngIf="selectedChat">
-  <div class="messages-window">
-    <div *ngFor="let message of messages" class="panel panel-default">
-      <div class="panel-body">
-        <p><strong>{{message.author}}</strong> @ {{message.created_at | date:"MMM, dd H:mm"}} wrote:</p>
-        {{message.text}}
+<div class="inner-chat-window">
+  <div class="messages-window" #messagesElem>
+    <div *ngIf="selectedChat">
+      <div *ngFor="let message of messages" class="panel panel-default">
+        <div class="panel-body">
+          <p><strong>{{message.author}}</strong> @ {{message.created_at | date:"MMM, dd H:mm"}} wrote:</p>
+          {{message.text}}
+        </div>
       </div>
     </div>
+  </div>
+  <div class="input-message-container">
+
   </div>
 </div>

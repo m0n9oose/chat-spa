@@ -1,13 +1,16 @@
-.chat-window {
-  height: 700px;
-  padding: 3px;
-}
-
-.chat-window .messages-window {
-  height: 80%;
-  overflow: auto;
-}
-
-.chat-window {
+.input-message-container {
+  border-top: 1px solid #e1e1e1;
   border-left: 1px solid #e1e1e1;
+  height: 100px;
+}
+
+.inner-chat-window {
+  height: 700px;
+}
+
+.messages-window {
+  border-left: 1px solid #e1e1e1;
+  height: 80%;
+  overflow: scroll;
+  padding-left: 30px;
 }
