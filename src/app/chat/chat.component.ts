@@ -1,14 +1,13 @@
-import {
-  Component,
-  Input,
-  ViewChild,
-  ElementRef
-}  from '@angular/core';
-import { Chat }               from '../_models/chat';
-import { Message }            from '../_models/message';
-import { User }               from '../_models/user';
-import { ChatService }        from '../_services/chat.service';
-import { WsService }          from '../_services/ws.service';
+import { Component }   from '@angular/core';
+import { Input }       from '@angular/core';
+import { ViewChild }   from '@angular/core';
+import { ElementRef }  from '@angular/core';
+
+import { Chat }        from '../_models/chat';
+import { Message }     from '../_models/message';
+import { User }        from '../_models/user';
+import { ChatService } from '../_services/chat.service';
+import { WsService }   from '../_services/ws.service';
 
 @Component({
   selector: 'chat-container',
@@ -38,21 +37,7 @@ export class ChatComponent {
     private elRef: ElementRef,
     private chatService: ChatService,
     private wsService: WsService
-  ) {
-    this.wsService.msgStream.subscribe(
-      (msg: Message) => {
-        this.messages.push(msg);
-      }
-    )
-  }
-
-  private loadChat(): void {
-    this.chatService.get(this._selectedChat.id).subscribe(data => {
-      this.messages = data['chat']['messages'];
-      this.members = data['chat']['users']
-      this.scrollToBottom();
-    });
-  }
+  ) {}
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -64,16 +49,26 @@ export class ChatComponent {
 
   submitMessage() {
     this.loading = true;
-    console.log(this.model);
     this.chatService.postMessage(this._selectedChat.id, this.model.text)
       .subscribe(
         data => {
           this.model.text = '';
-          console.log(data);
           this.loading = false;
         },
         error => {
           this.loading = false;
         });
+  }
+
+  incomingMessage(message: Message) {
+    this.messages.push(message);
+  }
+
+  private loadChat(): void {
+    this.chatService.get(this._selectedChat.id).subscribe(data => {
+      this.messages = data['chat']['messages'];
+      this.members = data['chat']['users']
+      this.scrollToBottom();
+    });
   }
 }

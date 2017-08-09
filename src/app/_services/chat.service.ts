@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import {
-  Http,
-  Headers,
-  RequestOptions,
-  Response,
-  URLSearchParams
-} from '@angular/http';
+import { Injectable }       from '@angular/core';
+import { Http }             from '@angular/http';
+import { Headers }          from '@angular/http';
+import { RequestOptions }   from '@angular/http';
+import { Response }         from '@angular/http';
+import { URLSearchParams }  from '@angular/http';
+
 import 'rxjs/add/operator/map';
-import { Chat } from '../_models/chat';
-import { Message } from '../_models/message';
+import { Chat }             from '../_models/chat';
+import { Message }          from '../_models/message';
 
 @Injectable()
 export class ChatService {

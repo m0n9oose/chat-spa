@@ -2,6 +2,7 @@
   <div class="list-group">
     <button *ngFor="let chat of chats" type="button" class="list-group-item" (click)="select(chat)" [class.active]="chat === activeChat">
       {{chat.subject}}
+      <span class="label label-info">{{chat.unreadCounter}}</span>
     </button>
   </div>
 </div>
