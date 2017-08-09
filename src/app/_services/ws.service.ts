@@ -14,19 +14,21 @@ export class WsService {
   msgStream;
   constructor() {
     this.urlString = this.connectionUrl();
-    this.msgStream = this.connect().map((response: MessageEvent): Message => {
-      return JSON.parse(response.data)
-    });
+    this.msgStream = this.connect().map(
+      (response: MessageEvent): Message => {
+        return JSON.parse(response.data)
+      }
+    );
   }
 
   private subject: Subject<any>;
 
-  connect(): Subject<MessageEvent> {
-    if (!this.subject) { this.subject = this.create(); }
+  private connect(): Subject<MessageEvent> {
+    if (!this.subject) { this.subject = this.createSubject(); }
     return this.subject;
   }
 
-  private create(): Subject<MessageEvent> {
+  private createSubject(): Subject<MessageEvent> {
     let ws = new WebSocket(this.urlString);
     console.log("Successfully connected: " + this.urlString);
     let observable = Observable.create(

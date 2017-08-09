@@ -31,15 +31,11 @@ export class ChatService {
   private options() {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let headers = new Headers();
-    // let params: URLSearchParams = new URLSearchParams();
     if (currentUser && currentUser.token) {
       headers.set('X-User-Email', currentUser.email)
       headers.set('X-User-Token', currentUser.token)
     }
 
-    return new RequestOptions({
-      headers: headers,
-      // params: params,
-    });
+    return new RequestOptions({ headers: headers });
   }
 }
