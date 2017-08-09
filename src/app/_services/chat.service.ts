@@ -28,6 +28,14 @@ export class ChatService {
     ).map((response: Response) => response.json());
   }
 
+  postMessage(chatId: number, text: string) {
+    return this.http.post(
+      'http://localhost:3000/chats/' + chatId + '/messages',
+      { text: text },
+      this.options()
+    ).map((response: Response) => response.json());
+  }
+
   private options() {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let headers = new Headers();

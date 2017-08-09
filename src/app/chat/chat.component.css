@@ -1,7 +1,7 @@
 .input-message-container {
   border-top: 1px solid #e1e1e1;
   border-left: 1px solid #e1e1e1;
-  height: 100px;
+  height: 65px;
 }
 
 .inner-chat-window {
@@ -13,4 +13,8 @@
   height: 80%;
   overflow: scroll;
   padding-left: 30px;
+}
+
+.form-new-message {
+  padding: 30px 0px 0px 30px;
 }

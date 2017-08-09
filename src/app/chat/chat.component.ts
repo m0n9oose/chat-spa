@@ -30,6 +30,8 @@ export class ChatComponent {
 
   messages: Message[] = [];
   members: User[] = [];
+  model: any = {};
+  loading = false;
   private _selectedChat: Chat;
 
   constructor(
@@ -58,5 +60,20 @@ export class ChatComponent {
 
   scrollToBottom(): void {
     this.messagesElem.nativeElement.scrollTop = this.messagesElem.nativeElement.scrollHeight
+  }
+
+  submitMessage() {
+    this.loading = true;
+    console.log(this.model);
+    this.chatService.postMessage(this._selectedChat.id, this.model.text)
+      .subscribe(
+        data => {
+          this.model.text = '';
+          console.log(data);
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        });
   }
 }
